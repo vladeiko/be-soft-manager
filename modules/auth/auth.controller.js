@@ -20,7 +20,7 @@ const signUp = async (req, res) => {
 
     res.status(200).json(result);
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(400).send({ error: err.message });
   }
 };
 
@@ -38,7 +38,7 @@ const signIn = async (req, res) => {
 
     res.status(200).json(userData);
   } catch (err) {
-    res.status(400).send(err.message);
+    res.status(400).json({ error: err.message });
   }
 };
 

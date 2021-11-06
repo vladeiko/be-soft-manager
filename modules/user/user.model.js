@@ -18,7 +18,7 @@ const getUserByEmail = async (email) => {
     const connection = await db.getPromise();
 
     const queryString = `
-  SELECT id, id as id_user, name, email, password
+  SELECT id, name, email, password, access_level
   FROM users
   WHERE email = ?;
   `;

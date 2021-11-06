@@ -14,6 +14,8 @@ const verifyPassword = async (candidate, actual) => {
 
 const signIn = async (email) => {
   const user = await UserService.getUserByEmail(email);
+  user.password = undefined;
+
   const token = generateAccessToken(user);
 
   return { user, access_token: token };
