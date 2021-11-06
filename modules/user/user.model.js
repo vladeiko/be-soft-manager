@@ -4,9 +4,16 @@ const getUserById = async (id) => {
   const connection = await db.getPromise();
 
   const queryString = `
-  SELECT id, id as id_user, name, email, password
-  FROM users
-  WHERE id = ?;
+  SELECT
+    user.id as id,
+    user.name as name,
+    user.email as email,
+    user.password as password,
+    role.name as role_name,
+    role.sys_name as role_sys_name
+  FROM users as user
+  INNER JOIN roles as role on user.role_id = role.id
+  WHERE user.id = ?;
   `;
 
   const result = await connection.query(queryString, [id]);
@@ -18,9 +25,16 @@ const getUserByEmail = async (email) => {
     const connection = await db.getPromise();
 
     const queryString = `
-  SELECT id, name, email, password, access_level
-  FROM users
-  WHERE email = ?;
+  SELECT
+    user.id as id,
+    user.name as name,
+    user.email as email,
+    user.password as password,
+    role.name as role_name,
+    role.sys_name as role_sys_name
+  FROM users as user
+  INNER JOIN roles as role on user.role_id = role.id
+  WHERE user.email = ?;
   `;
 
     const result = await connection.query(queryString, [email]);
