@@ -45,13 +45,13 @@ const getUserByEmail = async (email) => {
   }
 };
 
-const createUser = async ({ email, password, name }) => {
+const createUser = async ({ email, password, name, role_id }) => {
   const connection = await db.getPromise();
-  const params = [email, password, name];
+  const params = [email, password, name, role_id];
 
   const queryString = `
-  INSERT INTO users (email, password, name)
-  VALUES (?, ?, ?);
+  INSERT INTO users (email, password, name, role_id)
+  VALUES (?, ?, ?, ?);
   `;
   const result = await connection.query(queryString, params);
   return result[0];

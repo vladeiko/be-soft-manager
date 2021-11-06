@@ -9,13 +9,14 @@ const testRoute = async (req, res) => {
 
 const signUp = async (req, res) => {
   try {
-    const { email, password, name } = req.body.data;
-    if (!email || !password || !name) throw new Error("Invalid data");
+    const { email, password, name, role_id } = req.body.data;
+    if (!email || !password || !name || !role_id) throw new Error("Invalid data");
 
     const result = await UserService.createUser({
       email,
       password: await hashPassword(password),
       name,
+      role_id,
     });
 
     res.status(200).json(result);

@@ -10,11 +10,11 @@ const getUserByEmail = async (email) => {
   return user;
 };
 
-const createUser = async ({ email, password, name }) => {
+const createUser = async ({ email, password, name, role_id }) => {
   const existUser = await getUserByEmail(email);
   if (existUser) throw new Error(`User with email "${email}" already existed`);
 
-  const result = await UserModel.createUser({ email, password, name });
+  const result = await UserModel.createUser({ email, password, name, role_id });
   return await getUserById(result.insertId);
 };
 
