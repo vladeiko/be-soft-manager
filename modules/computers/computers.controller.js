@@ -16,7 +16,7 @@ const deleteComputer = async (req, res) => {
 
     await ComputersService.deleteComputer(computer_id);
 
-    res.status(200).json({ deletedComputerId: computer_id });
+    res.status(200).json({ deletedComputerId: Number(computer_id) });
   } catch (err) {
     res.status(418).send({ error: err.message });
   }
