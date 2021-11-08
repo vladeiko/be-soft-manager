@@ -10,6 +10,19 @@ const getAllComputers = async (req, res) => {
   }
 };
 
+const deleteComputer = async (req, res) => {
+  try {
+    const { computer_id } = req.query;
+
+    await ComputersService.deleteComputer(computer_id);
+
+    res.status(200).json({ deletedComputerId: computer_id });
+  } catch (err) {
+    res.status(418).send({ error: err.message });
+  }
+};
+
 module.exports = {
   getAllComputers,
+  deleteComputer,
 };

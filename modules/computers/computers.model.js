@@ -18,6 +18,21 @@ const getAllComputers = async () => {
   return result[0];
 };
 
+const deleteComputer = async (computerId) => {
+  const connection = await db.getPromise();
+
+  const params = [computerId];
+
+  const queryString = `
+  DELETE FROM computers
+  WHERE id = ?;
+  `;
+
+  const result = await connection.query(queryString, params);
+  return result[0];
+};
+
 module.exports = {
   getAllComputers,
+  deleteComputer,
 };
