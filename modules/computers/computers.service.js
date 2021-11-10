@@ -8,12 +8,12 @@ const deleteComputer = async (computerId) => {
   return await ComputersModel.deleteComputer(computerId);
 };
 
-const addNewComputer = async ({ location, ownerId, macAddress }) => {
+const addNewComputer = async ({ location, owner, macAddress }) => {
   const existComputer = await ComputersModel.getComputerByMAC(macAddress);
 
   if (existComputer) throw new Error("Computer already in system!");
 
-  const addRes = await ComputersModel.addNewComputer({ location, ownerId, macAddress });
+  const addRes = await ComputersModel.addNewComputer({ location, owner, macAddress });
 
   const newComputer = await ComputersModel.getComputerById(addRes.insertId);
 

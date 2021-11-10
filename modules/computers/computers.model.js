@@ -7,11 +7,9 @@ const getAllComputers = async () => {
   SELECT
     computer.id as id,
     computer.location as location,
-    user.name as owner_name,
-    user.id as owner_id,
+    computer.owner as owner,
     computer.mac_address as mac_address
   FROM computers as computer
-  INNER JOIN users as user on user.id = computer.owner_id;
   `;
 
   const result = await connection.query(queryString);
@@ -41,11 +39,9 @@ const getComputerByMAC = async (macAddress) => {
   SELECT
     computer.id as id,
     computer.location as location,
-    user.name as owner_name,
-    user.id as owner_id,
+    computer.owner as owner,
     computer.mac_address as mac_address
   FROM computers as computer
-  INNER JOIN users as user on user.id = computer.owner_id
   WHERE computer.mac_address = ?;
   `;
 
@@ -62,11 +58,9 @@ const getComputerById = async (id) => {
   SELECT
     computer.id as id,
     computer.location as location,
-    user.name as owner_name,
-    user.id as owner_id,
+    computer.owner as owner,
     computer.mac_address as mac_address
   FROM computers as computer
-  INNER JOIN users as user on user.id = computer.owner_id
   WHERE computer.id = ?;
   `;
 
@@ -74,13 +68,13 @@ const getComputerById = async (id) => {
   return result[0][0];
 };
 
-const addNewComputer = async ({ location, ownerId, macAddress }) => {
+const addNewComputer = async ({ location, owner, macAddress }) => {
   const connection = await db.getPromise();
 
-  const params = [location, ownerId, macAddress];
+  const params = [location, owner, macAddress];
 
   const queryString = `
-  INSERT INTO computers (location, owner_id, mac_address)
+  INSERT INTO computers (location, owner, mac_address)
   VALUES (?, ?, ?);
   `;
 

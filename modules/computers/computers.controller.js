@@ -24,9 +24,9 @@ const deleteComputer = async (req, res) => {
 
 const addNewComputer = async (req, res) => {
   try {
-    const { location, owner_id, mac_address } = req.body.data;
+    const { location, owner, mac_address } = req.body.data;
 
-    const result = await ComputersService.addNewComputer({ location, ownerId: owner_id, macAddress: mac_address });
+    const result = await ComputersService.addNewComputer({ location, owner, macAddress: mac_address });
 
     res.status(200).json({ computer: result });
   } catch (err) {
