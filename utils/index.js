@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const generateAccessToken = (user) => {
-  return jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: "86400s" });
+  return jwt.sign({ user }, process.env.TOKEN_SECRET, { expiresIn: "1000000s" });
 };
 
 const hashPassword = async (password) => {
