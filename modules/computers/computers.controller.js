@@ -46,9 +46,25 @@ const getComputerSoft = async (req, res) => {
   }
 };
 
+const removeSoftFromComputer = async (req, res) => {
+  try {
+    const { computer_id } = req.params;
+    const { soft_id } = req.query;
+
+    console.log(computer_id, soft_id);
+
+    await ComputersService.removeSoftFromComputer(computer_id, soft_id);
+
+    res.status(200).json({ removedSoftId: Number(soft_id) });
+  } catch (err) {
+    res.status(418).send({ error: err.message });
+  }
+};
+
 module.exports = {
   getAllComputers,
   deleteComputer,
   addNewComputer,
   getComputerSoft,
+  removeSoftFromComputer,
 };

@@ -100,6 +100,20 @@ const getComputerSoft = async (computerId) => {
   return result[0];
 };
 
+const removeSoftFromComputer = async (computerId, softId) => {
+  const connection = await db.getPromise();
+
+  const params = [computerId, softId];
+
+  const queryString = `
+  DELETE FROM computers_soft
+  WHERE computer_id = ? AND soft_id = ?;
+  `;
+
+  const result = await connection.query(queryString, params);
+  return result[0];
+};
+
 module.exports = {
   getAllSoft,
   deleteSoftFromComputer,
@@ -107,4 +121,5 @@ module.exports = {
   addNewSoft,
   getSoftById,
   getComputerSoft,
+  removeSoftFromComputer,
 };

@@ -25,9 +25,14 @@ const getComputerSoft = async (computerId) => {
   return await SoftModel.getComputerSoft(computerId);
 };
 
+const removeSoftFromComputer = async (computerId, softId) => {
+  return await SoftModel.removeSoftFromComputer(computerId, softId);
+};
+
 module.exports = {
   getAllComputers,
   deleteComputer,
   addNewComputer,
   getComputerSoft,
+  removeSoftFromComputer,
 };
