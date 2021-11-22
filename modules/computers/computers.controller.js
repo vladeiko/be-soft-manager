@@ -34,8 +34,48 @@ const addNewComputer = async (req, res) => {
   }
 };
 
+const getComputerSoft = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await ComputersService.getComputerSoft(id);
+
+    res.status(200).json({ soft: result });
+  } catch (err) {
+    res.status(418).send({ error: err.message });
+  }
+};
+
+const removeSoftFromComputer = async (req, res) => {
+  try {
+    const { computer_id } = req.params;
+    const { soft_id } = req.query;
+
+    await ComputersService.removeSoftFromComputer(computer_id, soft_id);
+
+    res.status(200).json({ removedSoftId: Number(soft_id) });
+  } catch (err) {
+    res.status(418).send({ error: err.message });
+  }
+};
+
+const addSoftToComputer = async (req, res) => {
+  try {
+    const { computer_id, soft_id } = req.body.data;
+
+    const result = await ComputersService.addSoftToComputer(computer_id, soft_id);
+
+    res.status(200).json({ addedSoft: result });
+  } catch (err) {
+    res.status(418).send({ error: err.message });
+  }
+};
+
 module.exports = {
   getAllComputers,
   deleteComputer,
   addNewComputer,
+  getComputerSoft,
+  removeSoftFromComputer,
+  addSoftToComputer,
 };
