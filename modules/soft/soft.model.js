@@ -114,6 +114,20 @@ const removeSoftFromComputer = async (computerId, softId) => {
   return result[0];
 };
 
+const addSoftToComputer = async (computerId, softId) => {
+  const connection = await db.getPromise();
+
+  const params = [computerId, softId];
+
+  const queryString = `
+  INSERT computers_soft (computer_id, soft_id)
+  VALUES (?, ?);
+  `;
+
+  const result = await connection.query(queryString, params);
+  return result[0];
+};
+
 module.exports = {
   getAllSoft,
   deleteSoftFromComputer,
@@ -122,4 +136,5 @@ module.exports = {
   getSoftById,
   getComputerSoft,
   removeSoftFromComputer,
+  addSoftToComputer,
 };
