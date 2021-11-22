@@ -58,6 +58,7 @@ const getSoftById = async (id) => {
     soft.sub_type as sub_type,
     soft.license_type as license_type
   FROM soft as soft
+  WHERE soft.id = ?
   `;
 
   const result = await connection.query(queryString, params);
