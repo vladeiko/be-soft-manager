@@ -34,8 +34,21 @@ const addNewComputer = async (req, res) => {
   }
 };
 
+const getComputerSoft = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await ComputersService.getComputerSoft(id);
+
+    res.status(200).json({ soft: result });
+  } catch (err) {
+    res.status(418).send({ error: err.message });
+  }
+};
+
 module.exports = {
   getAllComputers,
   deleteComputer,
   addNewComputer,
+  getComputerSoft,
 };

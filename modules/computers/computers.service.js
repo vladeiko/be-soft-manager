@@ -1,3 +1,4 @@
+const SoftModel = require("../soft/soft.model");
 const ComputersModel = require("./computers.model");
 
 const getAllComputers = async () => {
@@ -20,8 +21,13 @@ const addNewComputer = async ({ location, owner, macAddress }) => {
   return newComputer;
 };
 
+const getComputerSoft = async (computerId) => {
+  return await SoftModel.getComputerSoft(computerId);
+};
+
 module.exports = {
   getAllComputers,
   deleteComputer,
   addNewComputer,
+  getComputerSoft,
 };

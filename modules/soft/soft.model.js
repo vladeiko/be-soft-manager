@@ -79,10 +79,32 @@ const addNewSoft = async ({ name, type, sub_type, license_type }) => {
   return result[0];
 };
 
+const getComputerSoft = async (computerId) => {
+  const connection = await db.getPromise();
+
+  const params = [computerId];
+
+  const queryString = `
+  SELECT
+    soft.id as id,
+    soft.name as name,
+    soft.type as type,
+    soft.sub_type as sub_type,
+    soft.license_type as license_type
+  FROM computers_soft
+  INNER JOIN soft as soft ON soft.id = computers_soft.soft_id
+  WHERE computer_id = ?;
+  `;
+
+  const result = await connection.query(queryString, params);
+  return result[0];
+};
+
 module.exports = {
   getAllSoft,
   deleteSoftFromComputer,
   deleteSoft,
   addNewSoft,
   getSoftById,
+  getComputerSoft,
 };
